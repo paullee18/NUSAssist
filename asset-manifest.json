@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/nus-assist/static/css/main.073c9b0a.css",
+    "main.js": "/nus-assist/static/js/main.53f1376c.js",
+    "static/js/787.df9d49ac.chunk.js": "/nus-assist/static/js/787.df9d49ac.chunk.js",
+    "static/media/logo.svg": "/nus-assist/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/nus-assist/index.html",
+    "main.073c9b0a.css.map": "/nus-assist/static/css/main.073c9b0a.css.map",
+    "main.53f1376c.js.map": "/nus-assist/static/js/main.53f1376c.js.map",
+    "787.df9d49ac.chunk.js.map": "/nus-assist/static/js/787.df9d49ac.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.073c9b0a.css",
+    "static/js/main.53f1376c.js"
+  ]
+}
