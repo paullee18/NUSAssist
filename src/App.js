@@ -11,7 +11,6 @@ import Home from "./components/Home"
 function App() {
   return (
     <div>
-    ReactDOM.render(
       <Router>
         <Navigation />
         <Routes>
@@ -23,7 +22,6 @@ function App() {
       </Router>
 
 
-    );
     </div>
   );
 }
