@@ -1,4 +1,4 @@
-export const firebaseConfig = {
+export const config = {
     apiKey: "AIzaSyAs0KeS0IQ7Fx3B78l-drtJBz1ZtXO4Qt0",
     authDomain: "nusassist.firebaseapp.com",
     projectId: "nusassist",

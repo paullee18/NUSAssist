@@ -13,13 +13,20 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { NavLink } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
 
 const pages = ['Home', 'Calendar', 'Task Manager'];
-const settings = ['Profile', 'Logout'];
+const settings = ['Profile'];
 
 const ResponsiveAppBar = () => {
+  const { user, signout } = useAuth();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  const handleLogout = () => {
+    handleCloseUserMenu();
+    signout();
+  }
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -156,7 +163,10 @@ const ResponsiveAppBar = () => {
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
-              ))}
+              ))} 
+              <MenuItem key='Logout' onClick={handleLogout}>
+                  <Typography textAlign="center">Logout</Typography>
+                </MenuItem>
             </Menu>
           </Box>
         </Toolbar>
