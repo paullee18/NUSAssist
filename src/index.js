@@ -9,21 +9,26 @@ import reportWebVitals from './reportWebVitals';
 import CssBaseline from '@mui/material/CssBaseline';
 import Calendar from './components/Calendar'
 import TaskManager from './components/TaskManager'
-import ResponsiveAppBar from './components/ResponsiveAppBar';
+import { ProvideAuth } from "./hooks/useAuth";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
   <CssBaseline />
   <BrowserRouter>
-  <ResponsiveAppBar />
+  <ProvideAuth>
     <Routes>
-          <Route path="/" element={<App />} />
-          <Route path="calendar" element={<Calendar />} />
-          <Route path="task-manager" element={<TaskManager />} />
+
+          <Route path="/" element={<App />}>
+            <Route path="calendar" element={<Calendar />} />
+            <Route path="task-manager" element={<TaskManager />} />
+          </Route>
     </Routes>
+  </ProvideAuth>
   </BrowserRouter>
   </React.StrictMode>
+
+
 
 
 );
