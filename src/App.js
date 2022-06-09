@@ -10,8 +10,6 @@ function App() {
   const { user } = useAuth(); 
   return (
       <div>
-      <ResponsiveAppBar />
-      <Outlet />
       {user ? <Home /> : <Login />}
       </div>
   );

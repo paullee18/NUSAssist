@@ -18,11 +18,9 @@ root.render(
   <BrowserRouter>
   <ProvideAuth>
     <Routes>
-
-          <Route path="/" element={<App />}>
-            <Route path="calendar" element={<Calendar />} />
-            <Route path="task-manager" element={<TaskManager />} />
-          </Route>
+          <Route path="/" element={<App />} />
+          <Route path="calendar" element={<Calendar />} />
+          <Route path="task-manager" element={<TaskManager />} />
     </Routes>
   </ProvideAuth>
   </BrowserRouter>

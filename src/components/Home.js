@@ -1,5 +1,10 @@
+import ResponsiveAppBar from "./ResponsiveAppBar"
+
 function Home() {
-    return <p> Home </p>
+    return <div>
+                <ResponsiveAppBar />
+                <p> Home </p>
+           </div>
 }
 
 export default Home
