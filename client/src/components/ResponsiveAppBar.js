@@ -14,12 +14,14 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { NavLink } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
+import { styled } from "@mui/system";
+
 
 const pages = ['Home', 'Calendar', 'Task Manager'];
 const settings = ['Profile'];
 
 const ResponsiveAppBar = () => {
-  const { user, signout } = useAuth();
+  const { signout } = useAuth();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -43,8 +45,11 @@ const ResponsiveAppBar = () => {
     setAnchorElUser(null);
   };
 
+  const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
+
   return (
-    <AppBar position="static">
+    <React.Fragment>
+    <AppBar position="sticky">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
@@ -172,6 +177,8 @@ const ResponsiveAppBar = () => {
         </Toolbar>
       </Container>
     </AppBar>
+    {/* < Offset /> */}
+    </React.Fragment>
   );
 };
 export default ResponsiveAppBar;
