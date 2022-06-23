@@ -19,7 +19,8 @@
   },
   "homepage": "https://github.com/paullee18/NUSAssist#readme",
   "dependencies": {
-    "express": "^4.18.1"
+    "express": "^4.18.1",
+    "mongoose": "^6.4.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.16"
