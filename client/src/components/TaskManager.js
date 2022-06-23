@@ -3,25 +3,22 @@ import { useAuth } from "../hooks/useAuth";
 import Login from "./Login.js";
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './task-manager/components/wrappers/App';
-
-// Add bootstrap
-import 'bootstrap/dist/css/bootstrap.css';
-
-// Add our style
-import './task-manager/assets/style/index.css';
-
-
+import TodoApp from "./task_manager/TaskApp";
 
 function TaskManager() {
     const { user } = useAuth(); 
 
     return user ?
     (
-        ReactDOM.render(
-            <App/>,
-            document.getElementById('root')
-        )
+        <div>
+            <ResponsiveAppBar />
+            <p>
+                <TodoApp />
+            </p>
+        </div>
+        // ReactDOM.render(<TodoApp />, document.getElementById('root'))
+        
+        // <TodoApp/>
     ) : <Login />;
 }
 
