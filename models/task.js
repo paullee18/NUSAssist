@@ -11,8 +11,6 @@ const taskSchema = new mongoose.Schema({
     },
 });
 
-// Might need code that converts id to int here
-
 const taskModel = mongoose.model("Task", taskSchema);
 
 module.exports = taskModel;
