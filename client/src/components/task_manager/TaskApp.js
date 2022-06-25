@@ -11,13 +11,12 @@ import {
   IconButton,
   Container,
   Paper,
-  Stack
+
 } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import { green } from '@mui/material/colors';
-import ResponsiveAppBar from "../ResponsiveAppBar";
-import Button from "@mui/material/Button";
+
 
 
 
@@ -77,17 +76,10 @@ function TodoForm({ addTodo }) {
 export default function TodoApp() {
   const [todos, setTodos] = useState([
     {
-      text: "Practice JavaScript",
-      isCompleted: false
-    },
-    {
-      text: "Update Resume",
-      isCompleted: false
-    },
-    {
-      text: "Go Kyaking",
+      text: "Use NUSAssist",
       isCompleted: false
     }
+
   ]);
 
   const addTodo = text => {

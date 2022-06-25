@@ -1,6 +1,7 @@
 import ResponsiveAppBar from "./ResponsiveAppBar"
 import { useAuth } from "../hooks/useAuth";
 import Login from "./Login.js";
+import Calendar1 from "react-calendar";
 
 function Calendar() {
     const { user } = useAuth(); 
@@ -10,7 +11,7 @@ function Calendar() {
     (
         <div>
         <ResponsiveAppBar />
-        <p> Calendar </p>
+        <p> <Calendar1 /> </p>
         </div>
     ) : <Login/>;
 }

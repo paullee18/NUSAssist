@@ -4,6 +4,7 @@ import Login from "./Login.js";
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TodoApp from "./task_manager/TaskApp";
+import Todo from "./task_manager/TaskMan";
 
 function TaskManager() {
     const { user } = useAuth(); 
@@ -12,13 +13,13 @@ function TaskManager() {
     (
         <div>
             <ResponsiveAppBar />
-            <p>
-                <TodoApp />
-            </p>
+            <h2>
+                TO DO LIST
+            </h2>
+                <Todo />
+            
         </div>
-        // ReactDOM.render(<TodoApp />, document.getElementById('root'))
-        
-        // <TodoApp/>
+
     ) : <Login />;
 }
 
