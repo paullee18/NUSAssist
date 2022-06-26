@@ -11,7 +11,7 @@ function Calendar() {
     (
         <div>
         <ResponsiveAppBar />
-        <p> <Calendar1 /> </p>
+        <p> Calendar </p>
         </div>
     ) : <Login/>;
 }
