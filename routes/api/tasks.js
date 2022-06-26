@@ -9,10 +9,10 @@ function success(res, payload) {
 // Get all tasks
 router.get('/', async(req, res) => {
     try {
-        const tasks = await db.find({});
+        const tasks = await db.find({ uid: req.headers.uid });
         return success(res, tasks);
     } catch (err) {
-        return res.status(400).json({ msg: "failed to get todos" })
+        return res.status(400).json({ msg: "Failed to get todos" })
     }
 });
 
@@ -23,7 +23,7 @@ router.post('/', async(req, res) => {
         const savedPhone = task.save();
         return success(res, savedPhone);
     } catch(err) {
-        return res.status(400).json({ msg: "failed to create task"});
+        return res.status(400).json({ msg: "Failed to create task"});
     }
 })
 

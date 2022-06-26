@@ -5,9 +5,10 @@ const express = require('express');
 const router = require('./routes/api/tasks');
 const db = require('./models/task');
 const bodyParser = require("body-parser");
+const cors = require('cors');
 
 mongoose.connect(
-    'mongodb+srv://nusassist:<PASSWORD>@nusassist.apx1xlz.mongodb.net/?retryWrites=true&w=majority',
+    'mongodb+srv://nusassist:paulthesh@nusassist.apx1xlz.mongodb.net/?retryWrites=true&w=majority',
     { useNewUrlParser: true, useUnifiedTopology: true })
         .then(() => {
             console.log('Connected to database');
@@ -23,6 +24,7 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(bodyParser.json());
+app.use(cors());
 
 // tasks API routes
 app.use('/api/tasks', router);

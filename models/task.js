@@ -5,10 +5,19 @@ const taskSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    desc: {
+        type: String,
+        required: false
+    },
     completed: {
         type: Boolean,
         default: false,
     },
+    // unique id of account that task belongs to
+    uid: {
+        type: String,
+        required: true
+    }
 });
 
 const taskModel = mongoose.model("Task", taskSchema);
