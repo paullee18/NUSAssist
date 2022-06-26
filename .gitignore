@@ -18,6 +18,8 @@
 .env.test.local
 .env.production.local
 index.js
+serviceAccount.json
+authenticateToken.js
 
 npm-debug.log*
 yarn-debug.log*

@@ -9,18 +9,23 @@ import Todo from "./task_manager/TaskMan";
 function TaskManager() {
     const { user } = useAuth(); 
 
-    return user ?
-    (
-        <div>
-            <ResponsiveAppBar />
-            <h2>
-                TO DO LIST
-            </h2>
-                <Todo />
+    if (user) {
+        const uid = user.uid;
+        
+        return (
+            <div>
+                <ResponsiveAppBar />
+                <h2>
+                    TO DO LIST
+                </h2>
+                <Todo uid={uid}/>
             
-        </div>
+            </div>
+        )
+    } else {
+        return <Login />;
+    }
 
-    ) : <Login />;
 }
 
 export default TaskManager;

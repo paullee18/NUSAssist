@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Icon, IconButton } from "@mui/material";
 import CreateIcon from '@mui/icons-material/Create';
+import { addToDB } from "../../services/taskManagerServices";
  
-const Todo = () => {
+const Todo = (props) => {
+ const { uid } = props;
+
  const [showForm, setshowform] = useState(true);
  const [showNew, setshowNew] = useState(true);
  const [showDelete, setshowDelete] = useState(true);
@@ -63,6 +66,7 @@ const Todo = () => {
        name: inputTitle,
        desc: inputDesc,
      };
+     addToDB(inputTitle, inputDesc, uid);
      setitems([allinputTitle, ...items]);
      setinputTitle("");
      setinputDesc("");
