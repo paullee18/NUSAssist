@@ -12,10 +12,10 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
 import { isDisabled } from "@testing-library/user-event/dist/utils";
-
-
-
-const Todo = () => {
+import { addToDB } from "../../services/taskManagerServices";
+ 
+const Todo = (props) => {
+ const { uid } = props;
  const [showForm, setshowform] = useState(true);
  const [showNew, setshowNew] = useState(true);
  const [showDelete, setshowDelete] = useState(true);
@@ -88,6 +88,7 @@ const Todo = () => {
        desc: inputDesc,
        completed: isCompleted,
      };
+     addToDB(inputTitle, inputDesc, uid);
      setitems([allinputTitle, ...items]);
      setinputTitle("");
      setinputDesc("");
