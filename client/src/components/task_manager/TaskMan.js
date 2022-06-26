@@ -2,11 +2,20 @@ import React, { useState } from "react";
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Icon, IconButton } from "@mui/material";
 import CreateIcon from '@mui/icons-material/Create';
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import Typography from '@mui/material/Typography';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Stack from '@mui/material/Stack';
+import Container from '@mui/material/Container';
+import Button from '@mui/material/Button';
+import Checkbox from '@mui/material/Checkbox';
+import { isDisabled } from "@testing-library/user-event/dist/utils";
 import { addToDB } from "../../services/taskManagerServices";
  
 const Todo = (props) => {
  const { uid } = props;
-
  const [showForm, setshowform] = useState(true);
  const [showNew, setshowNew] = useState(true);
  const [showDelete, setshowDelete] = useState(true);
@@ -16,6 +25,7 @@ const Todo = (props) => {
  const [editMessage, seteditMessage] = useState(false);
  const [deleteMessage, setdeleteMessage] = useState(false);
  const [deleteMessagesuccess, setdeleteMessagesuccess] = useState(false);
+ const [isCompleted, setisCompleted] = useState(false);
  const [inputTitle, setinputTitle] = useState("");
  const [inputDesc, setinputDesc] = useState("");
  const [items, setitems] = useState([
@@ -24,8 +34,10 @@ const Todo = (props) => {
      name: "Task name here",
      desc: "Description here",
      status: false,
+     completed: false,
    },
  ]);
+
  
  //   HANDLING INPUT FIELDS
  const handleInput = (e) => {
@@ -34,6 +46,14 @@ const Todo = (props) => {
  const handleInputdesc = (e) => {
    setinputDesc(e.target.value);
  };
+ const handleComplete = (index) => {
+   const toUpdate = items.find((elem) => {
+    return index === elem.id
+   });
+   setisCompleted(!toUpdate.completed);
+   setisEditItem(index);
+   console.log(toUpdate);
+ }
  //   HANDLING INPUT FIELDS
  
  //   SUBMITTING FORM
@@ -42,7 +62,7 @@ const Todo = (props) => {
    setshowNew(true);
  
    e.preventDefault();
-   if (!inputTitle || !inputDesc) {
+   if (!inputTitle ) {
      alert("fill data");
      showList(false);
    } else if (inputTitle && !toggleSubmit) {
@@ -60,11 +80,13 @@ const Todo = (props) => {
      settoggleSubmit(true);
      setshowform(false);
      setshowDelete(true);
+     setisCompleted(false);
    } else {
      const allinputTitle = {
        id: new Date().getTime().toString(),
        name: inputTitle,
        desc: inputDesc,
+       completed: isCompleted,
      };
      addToDB(inputTitle, inputDesc, uid);
      setitems([allinputTitle, ...items]);
@@ -82,11 +104,12 @@ const Todo = (props) => {
      return index !== elem.id;
    });
    setdeleteMessage(true);
+   setitems(updatedItems);
  
    setTimeout(() => {
-     setitems(updatedItems);
      setdeleteMessage(false);
-   }, 2000);
+   }, 1000);
+
    setdeleteMessagesuccess(false);
  };
  //   DELETE
@@ -97,6 +120,7 @@ const Todo = (props) => {
    setshowDelete(false);
    setshowNew(false);
    setshowform(true);
+   setisCompleted(false);
  
    settoggleSubmit(false);
    let newEditItem = items.find((elem) => {
@@ -117,18 +141,19 @@ const Todo = (props) => {
    setshowform(true);
    setshowList(true);
    setshowNew(false);
+   setisCompleted(false);
  };
  // ADD NEW TASK
  return (
    <>
      {showNew ? (
-       <div className="container">
+       <Container>
          <div className="col-12 text-end">
-           <button className="btn btn-primary " onClick={handleAdd}>
+           <Button variant="contained" onClick={handleAdd}>
              Add New Task
-           </button>
+           </Button>
          </div>
-       </div>
+       </Container>
      ) : (
        ""
      )}
@@ -141,7 +166,7 @@ const Todo = (props) => {
                <h2>{toggleSubmit ? "Add Task" : " Edit Task"}</h2>
              </div>
              <form className="col-12 p-2" onSubmit={handleSubmit}>
-               <label htmlFor="title" className="my-2">
+               <label htmlFor="Title" className="my-2">
                  Enter Title
                </label>
                <input
@@ -154,7 +179,7 @@ const Todo = (props) => {
                  value={inputTitle}
                />
                <label className="my-2" htmlFor="description">
-                 Enter
+                 Enter Description (Optional)
                </label>
                <input
                  type="text"
@@ -181,7 +206,7 @@ const Todo = (props) => {
      )}
  
      {showList ? (
-       <div className="container py-2 ">
+       <Container>
          {deleteMessage ? (
            <p className="text-center text-danger">Item Deleted Successfully !</p>
          ) : (
@@ -189,17 +214,31 @@ const Todo = (props) => {
          )}
          {items.map((elem, index) => {
            return (
-
              <div
-               className="row border rounded shadow p-3 mb-3 bg-white rounded  p-2"
-               key={elem.id}
+             key = {elem.id}
              >
-               <div className="col-12 d-flex justify-content-between align-items-end">
-                 <div>
-                   <h4>{elem.name}</h4>
-                   <p>{elem.desc}</p>
-                 </div>
-                   <IconButton aria-label="create"
+              <Accordion >
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"  
+        >
+          <Typography sx={{ width: '95%', flexShrink: 0 }}>
+          <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+          spacing={2}
+          >
+            <span style={{textDecoration: elem.completed  ? 'line-through' : ''}}> {elem.name} </span>
+            <Stack
+              direction="row"
+              justifyContent="center"
+              alignItems="center"
+              spacing={1}
+            >
+            <Checkbox onClick = {() => handleComplete(elem.id)} color="success" />
+            <IconButton aria-label="create"
                      onClick={() => handleEdit(elem.id)}
                    >
                     <CreateIcon />
@@ -214,12 +253,21 @@ const Todo = (props) => {
                    ) : (
                      ""
                    )}
-                 </div>
+                   </Stack>
+            </Stack>
+            </Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography textAlign="left">
+          {elem.desc}
+          </Typography>
+        </AccordionDetails>
+      </Accordion>
                </div>
             
            );
          })}
-       </div>
+       </Container>
      ) : (
        ""
      )}

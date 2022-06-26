@@ -3,7 +3,6 @@ import { useAuth } from "../hooks/useAuth";
 import Login from "./Login.js";
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TodoApp from "./task_manager/TaskApp";
 import Todo from "./task_manager/TaskMan";
 
 function TaskManager() {
