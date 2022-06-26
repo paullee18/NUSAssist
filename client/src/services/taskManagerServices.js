@@ -54,3 +54,17 @@ export const deleteFromDB = async (id) => {
 }
 
 // Edit task
+export const editTask = async (id, name, desc) => {
+    try {
+        const payload = {
+            "task": name,
+            "desc": desc,
+        }
+        const taskUrl = url + `/${id}`;
+
+        const res = await axios.put(taskUrl, payload);
+        return res.data;
+    } catch (e) {
+        console.error(e);
+    }
+}

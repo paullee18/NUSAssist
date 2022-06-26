@@ -65,9 +65,12 @@ const ResponsiveAppBar = () => {
               fontWeight: 700,
               color: 'inherit',
               textDecoration: 'none',
+              
             }}
           >
+            <span className="font-link">
             NUSAssist
+            </span> 
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -123,6 +126,7 @@ const ResponsiveAppBar = () => {
               letterSpacing: '.3rem',
               color: 'inherit',
               textDecoration: 'none',
+              
             }}
           >
             LOGO
@@ -135,8 +139,9 @@ const ResponsiveAppBar = () => {
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               > 
+              <span className='font-link'>
                 {page}
-                
+              </span>
               </Button>
               </NavLink>
             ))}

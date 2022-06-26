@@ -4,6 +4,8 @@ import Login from "./Login.js";
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Todo from "./task_manager/TaskMan";
+import Box from '@mui/material/Box';
+
 
 function TaskManager() {
     const { user } = useAuth(); 
@@ -14,9 +16,11 @@ function TaskManager() {
         return (
             <div>
                 <ResponsiveAppBar />
-                <h2>
+                <Box pt={2}>
+                <h2 className="font-link">
                     TO DO LIST
                 </h2>
+                </Box>
                 <Todo uid={uid}/>
             
             </div>
