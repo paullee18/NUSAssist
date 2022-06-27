@@ -45,7 +45,6 @@ useEffect(() => {
   const fetchEntries = async (uid) => {
     const fetchedEntries = await getTaskEntries(uid);
     setitems(fetchedEntries);
-    console.log(fetchedEntries[0]._id);
   }
   fetchEntries(uid);
 }, [])
@@ -98,14 +97,9 @@ if (items === undefined) {
      setshowDelete(true);
     //  setisCompleted(false);
    } else {
-     const allinputTitle = {
-       _id: new Date().getTime().toString(),
-       task: inputTitle,
-       desc: inputDesc,
-      //  completed: isCompleted,
-     };
-     addToDB(inputTitle, inputDesc, uid);
-     setitems([allinputTitle, ...items]);
+
+     addToDB(inputTitle, inputDesc, uid).then(newItem => setitems([newItem, ...items]));
+
      setinputTitle("");
      setinputDesc("");
      setshowform(false);
@@ -115,7 +109,6 @@ if (items === undefined) {
  
  //   DELETE
  const handleDelete = (index) => {
-   console.log(index);
    const updatedItems = items.filter((elem) => {
      return index !== elem._id;
    });
