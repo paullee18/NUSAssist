@@ -21,7 +21,7 @@ router.post('/', async(req, res) => {
     try {
         const task = new db(req.body);
         const savedPhone = task.save();
-        return success(res, savedPhone);
+        return success(res, task);
     } catch(err) {
         return res.status(400).json({ msg: "Failed to create task"});
     }
