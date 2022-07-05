@@ -16,7 +16,7 @@ import { isDisabled } from "@testing-library/user-event/dist/utils";
 import { addToDB, getTaskEntries, deleteFromDB, editTask } from "../../services/taskManagerServices";
  
 const Todo = (props) => {
- const { uid } = props;
+ const { uid, tokenPromise } = props;
  const [showForm, setshowform] = useState(true);
  const [showNew, setshowNew] = useState(true);
  const [showDelete, setshowDelete] = useState(true);
@@ -43,7 +43,7 @@ const [ items, setitems ] = useState();
 
 useEffect(() => {
   const fetchEntries = async (uid) => {
-    const fetchedEntries = await getTaskEntries(uid);
+    const fetchedEntries = await getTaskEntries(uid, tokenPromise);
     setitems(fetchedEntries);
   }
   fetchEntries(uid);
@@ -83,7 +83,7 @@ if (items === undefined) {
      setitems(
        items.map((elem) => {
          if (elem._id === isEditItem) {
-           editTask(elem._id, inputTitle, inputDesc);
+           editTask(uid, elem._id, inputTitle, inputDesc, tokenPromise);
            return { ...elem, task: inputTitle, desc: inputDesc };
          }
          return elem;
@@ -98,7 +98,7 @@ if (items === undefined) {
     //  setisCompleted(false);
    } else {
 
-     addToDB(inputTitle, inputDesc, uid).then(newItem => setitems([newItem, ...items]));
+     addToDB(inputTitle, inputDesc, uid, tokenPromise).then(newItem => setitems([newItem, ...items]));
 
      setinputTitle("");
      setinputDesc("");
@@ -112,7 +112,7 @@ if (items === undefined) {
    const updatedItems = items.filter((elem) => {
      return index !== elem._id;
    });
-   deleteFromDB(index);
+   deleteFromDB(uid, index, tokenPromise);
    setdeleteMessage(true);
    setitems(updatedItems);
  
