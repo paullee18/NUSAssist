@@ -9,8 +9,12 @@ function success(res, payload) {
 // Get all tasks
 router.get('/', async(req, res) => {
     try {
-        const tasks = await db.find({ uid: req.headers.uid });
-        return success(res, tasks);
+        const auth = req.currentUser;
+        if (auth) {
+            const tasks = await db.find({ uid: req.headers.uid });
+            return success(res, tasks);
+        }
+        return res.status(400).json({ msg: "Not authorised "});
     } catch (err) {
         return res.status(400).json({ msg: "Failed to get todos" })
     }
@@ -19,9 +23,13 @@ router.get('/', async(req, res) => {
 // Create task
 router.post('/', async(req, res) => {
     try {
-        const task = new db(req.body);
-        const savedPhone = task.save();
-        return success(res, task);
+        const auth = req.currentUser;
+        if (auth) {
+            const task = new db(req.body);
+            const savedPhone = task.save();
+            return success(res, task);
+        }
+        return res.status(400).json({ msg: "Not authorised" });
     } catch(err) {
         return res.status(400).json({ msg: "Failed to create task"});
     }
@@ -30,10 +38,14 @@ router.post('/', async(req, res) => {
 // Update task
 router.put('/:id', async(req, res) => {
     try {
-        const task = await db.findByIdAndUpdate(req.params.id, req.body, {
-            new: true,
-        })
-        return success(res, task);
+        const auth = req.currentUser;
+        if (auth) {
+            const task = await db.findByIdAndUpdate(req.params.id, req.body, {
+                new: true,
+            })
+            return success(res, task);
+        }
+        return res.status(400).json({ msg: "Not authorised" });
     } catch (err) {
         return res.status(400).json({ msg: "Failed to update task"});
     }
@@ -43,8 +55,12 @@ router.put('/:id', async(req, res) => {
 // Delete task
 router.delete('/:id', async(req, res) => {
     try {
-        const removed = await db.findByIdAndRemove(req.params.id)
-        return success(res, removed);
+        const auth = req.currentUser;
+        if (auth) {
+            const removed = await db.findByIdAndRemove(req.params.id)
+            return success(res, removed);
+        }
+        return res.status(400).json({ msg: "Not authorised" });
     } catch (err) {
         return res.status(400).json({ msg: "Failed to delete todo"});
     }
