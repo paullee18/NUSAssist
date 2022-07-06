@@ -29,15 +29,19 @@ const Todo = (props) => {
 //  const [isCompleted, setisCompleted] = useState(false);
  const [inputTitle, setinputTitle] = useState("");
  const [inputDesc, setinputDesc] = useState("");
-//  const [items, setitems] = useState([
-//    {
-//      id: "001",
-//      name: "Task name here",
-//      desc: "Description here",
-//      status: false,
-//      completed: false,
-//    },
-//  ]);
+ const [inputDeadline, setInputDeadline] = useState("");
+ const [items, setitems] = useState([
+   {
+     id: "001",
+     name: "Task name here",
+     desc: "Description here",
+     status: false,
+     completed: false,
+     deadline: "",
+     
+   },
+ ]);
+
 
 const [ items, setitems ] = useState();
 
@@ -60,14 +64,18 @@ if (items === undefined) {
  const handleInputdesc = (e) => {
    setinputDesc(e.target.value);
  };
-//  const handleComplete = (index) => {
-//    const toUpdate = items.find((elem) => {
-//     return index === elem.id
-//    });
-//    setisCompleted(!toUpdate.completed);
-//    setisEditItem(index);
-//    console.log(toUpdate);
-//  }
+ const handleComplete = (index) => {
+   const toUpdate = items.find((elem) => {
+    return index === elem.id
+   });
+   setisCompleted(!toUpdate.completed);
+   setisEditItem(index);
+   console.log(toUpdate);
+ }
+ const handleInputDeadline = (e) => {
+  setInputDeadline(e.target.value);
+ }
+
  //   HANDLING INPUT FIELDS
  
  //   SUBMITTING FORM
@@ -92,6 +100,7 @@ if (items === undefined) {
  
      setinputTitle("");
      setinputDesc("");
+     setInputDeadline("");
      settoggleSubmit(true);
      setshowform(false);
      setshowDelete(true);
@@ -139,6 +148,7 @@ if (items === undefined) {
    setinputTitle(newEditItem.task);
 
    setinputDesc(newEditItem.desc);
+   setInputDeadline(newEditItem.inputDeadline)
    // setshowDelete(true)
  
    setisEditItem(_id);
@@ -150,7 +160,6 @@ if (items === undefined) {
  
  // ADD NEW TASK
  const handleAdd = () => {
-   //   alert("hello")
    setshowform(true);
    setshowList(true);
    setshowNew(false);
@@ -208,6 +217,18 @@ if (items === undefined) {
                  value={inputDesc}
                />
                {/* <div className="text-center"> */}
+               <label className="my-2" >
+                 Deadline (Optional)
+               </label>
+               <input
+                 type="date"
+                 name="deadline"
+                 id="deadline"
+                 placeholder="DD/MM/YYYY"
+                 className="w-100 my-1 p-2"
+                 onChange={handleInputDeadline}
+                 value={inputDeadline}
+               />
                {toggleSubmit ? (
                  <button className="btn btn-primary my-2 font-link">Save</button>
                ) : (

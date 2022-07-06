@@ -1,4 +1,4 @@
-body {
+/* body {
   text-align: center;
   margin: 0 auto;
   padding: 0;
@@ -12,7 +12,11 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
-}
+} */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 
 .font-link {
   font-family: 'Roboto';
