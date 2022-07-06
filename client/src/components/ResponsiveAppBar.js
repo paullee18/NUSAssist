@@ -15,6 +15,7 @@ import AdbIcon from '@mui/icons-material/Adb';
 import { NavLink } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { styled } from "@mui/system";
+import SettingsIcon from '@mui/icons-material/SettingsApplications';
 
 
 const pages = ['Home', 'Calendar', 'Task Manager'];
@@ -150,7 +151,7 @@ const ResponsiveAppBar = () => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <SettingsIcon fontSize="large"/>
               </IconButton>
             </Tooltip>
             <Menu
