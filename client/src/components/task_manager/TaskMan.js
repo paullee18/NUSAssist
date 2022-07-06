@@ -30,18 +30,6 @@ const Todo = (props) => {
  const [inputTitle, setinputTitle] = useState("");
  const [inputDesc, setinputDesc] = useState("");
  const [inputDeadline, setInputDeadline] = useState("");
- const [items, setitems] = useState([
-   {
-     id: "001",
-     name: "Task name here",
-     desc: "Description here",
-     status: false,
-     completed: false,
-     deadline: "",
-     
-   },
- ]);
-
 
 const [ items, setitems ] = useState();
 
@@ -68,7 +56,7 @@ if (items === undefined) {
    const toUpdate = items.find((elem) => {
     return index === elem.id
    });
-   setisCompleted(!toUpdate.completed);
+  //  setisCompleted(!toUpdate.completed);
    setisEditItem(index);
    console.log(toUpdate);
  }
