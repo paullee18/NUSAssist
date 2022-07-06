@@ -1,5 +1,3 @@
-// Duplicated index.js uploaded to github for mongoose db security reasons
-
 const mongoose = require('mongoose');
 const express = require('express');
 const router = require('./routes/api/tasks');
@@ -8,7 +6,7 @@ const bodyParser = require("body-parser");
 const cors = require('cors');
 
 mongoose.connect(
-    'mongodb+srv://nusassist:paulthesh@nusassist.apx1xlz.mongodb.net/?retryWrites=true&w=majority',
+    'mongodb+srv://nusassist:<PASSWORD>@nusassist.apx1xlz.mongodb.net/?retryWrites=true&w=majority',
     { useNewUrlParser: true, useUnifiedTopology: true })
         .then(() => {
             console.log('Connected to database');
@@ -19,6 +17,9 @@ mongoose.connect(
     
 
 const app = express();
+
+const decodeIDToken = require('./authenticateToken');
+app.use(decodeIDToken);
 
 app.use(bodyParser.urlencoded({
     extended: true
