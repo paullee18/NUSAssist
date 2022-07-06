@@ -14,9 +14,9 @@ function TaskManager() {
         return (
             <div>
                 <ResponsiveAppBar />
-                <h2>
+                <div className="col-7 text-end">
                     TO DO LIST
-                </h2>
+                </div>
                 <Todo uid={uid}/>
             
             </div>

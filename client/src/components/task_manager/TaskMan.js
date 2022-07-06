@@ -28,6 +28,7 @@ const Todo = (props) => {
  const [isCompleted, setisCompleted] = useState(false);
  const [inputTitle, setinputTitle] = useState("");
  const [inputDesc, setinputDesc] = useState("");
+ const [inputDeadline, setInputDeadline] = useState("");
  const [items, setitems] = useState([
    {
      id: "001",
@@ -35,6 +36,8 @@ const Todo = (props) => {
      desc: "Description here",
      status: false,
      completed: false,
+     deadline: "",
+     
    },
  ]);
 
@@ -53,6 +56,9 @@ const Todo = (props) => {
    setisCompleted(!toUpdate.completed);
    setisEditItem(index);
    console.log(toUpdate);
+ }
+ const handleInputDeadline = (e) => {
+  setInputDeadline(e.target.value);
  }
  //   HANDLING INPUT FIELDS
  
@@ -77,6 +83,7 @@ const Todo = (props) => {
  
      setinputTitle("");
      setinputDesc("");
+     setInputDeadline("");
      settoggleSubmit(true);
      setshowform(false);
      setshowDelete(true);
@@ -128,6 +135,7 @@ const Todo = (props) => {
    });
    setinputTitle(newEditItem.name);
    setinputDesc(newEditItem.desc);
+   setInputDeadline(newEditItem.inputDeadline)
    // setshowDelete(true)
  
    setisEditItem(id);
@@ -137,7 +145,6 @@ const Todo = (props) => {
  
  // ADD NEW TASK
  const handleAdd = () => {
-   //   alert("hello")
    setshowform(true);
    setshowList(true);
    setshowNew(false);
@@ -191,6 +198,18 @@ const Todo = (props) => {
                  value={inputDesc}
                />
                {/* <div className="text-center"> */}
+               <label className="my-2" >
+                 Deadline (Optional)
+               </label>
+               <input
+                 type="date"
+                 name="deadline"
+                 id="deadline"
+                 placeholder="DD/MM/YYYY"
+                 className="w-100 my-1 p-2"
+                 onChange={handleInputDeadline}
+                 value={inputDeadline}
+               />
                {toggleSubmit ? (
                  <button className="btn btn-primary my-2">Save</button>
                ) : (
