@@ -5,11 +5,11 @@ const url = "http://localhost:5000/api/tasks";
 // Add task
 export const addToDB = async (name, desc, uid, tokenPromise) => {
     const header = await createReqHeader(uid, tokenPromise);
-    
     const payload = {
         "task": name,
         "desc": desc,
         "uid": uid,
+        "date": new Date(),
     }
     try {
         const res = await axios.post(url, payload, header);

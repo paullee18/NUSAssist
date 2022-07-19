@@ -9,6 +9,7 @@ import reportWebVitals from './reportWebVitals';
 import CssBaseline from '@mui/material/CssBaseline';
 import Calendar from './components/Calendar'
 import TaskManager from './components/TaskManager'
+import Signup from './components/Signup'
 import { ProvideAuth } from "./hooks/useAuth";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -21,6 +22,7 @@ root.render(
           <Route path="/" element={<App />} />
           <Route path="calendar" element={<Calendar />} />
           <Route path="task-manager" element={<TaskManager />} />
+          <Route path="signup" element={<Signup />} />
     </Routes>
   </ProvideAuth>
   </BrowserRouter>
