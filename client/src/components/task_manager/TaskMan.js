@@ -36,7 +36,7 @@ const [ items, setitems ] = useState();
 useEffect(() => {
   const fetchEntries = async (uid) => {
     const fetchedEntries = await getTaskEntries(uid, tokenPromise);
-    setitems(fetchedEntries);
+    setitems(fetchedEntries.sort(function(task1,task2){return new Date(task2.date)- new Date(task1.date)}));
   }
   fetchEntries(uid);
 }, [])

@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
 import React, { useState, useEffect, useContext, createContext } from "react";
 import { config as firebaseConfig } from "../config/firebaseConfig.js";
 
@@ -46,10 +46,10 @@ function useProvideAuth() {
   };
 
   const signup = (email, password) => {
-    return firebaseAuth
-      .createUserWithEmailAndPassword(email, password)
+    return createUserWithEmailAndPassword(firebaseAuth, email, password)
       .then((response) => {
         setUser(response.user);
+        sendEmailVerification(response.user);
         return response.user;
       });
   };
