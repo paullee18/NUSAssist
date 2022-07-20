@@ -26,7 +26,7 @@ router.post('/', async(req, res) => {
         const auth = req.currentUser;
         if (auth) {
             const task = new db(req.body);
-            const savedPhone = task.save();
+            const savedTask = task.save();
             return success(res, task);
         }
         return res.status(400).json({ msg: "Not authorised" });
