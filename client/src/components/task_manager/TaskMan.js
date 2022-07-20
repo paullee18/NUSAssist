@@ -40,17 +40,23 @@ const Todo = (props) => {
  const [inputDesc, setinputDesc] = useState("");
  const [inputDeadline, setInputDeadline] = useState(null);
 
-const [ items, setitems ] = useState();
+const [ items, setitems ] = useState([]);
 
 useEffect(() => {
   const fetchEntries = async (uid) => {
     const fetchedEntries = await getTaskEntries(uid, tokenPromise);
     setitems(fetchedEntries.sort(function(task1,task2){return new Date(task2.date)- new Date(task1.date)}));
+    if (items.length === 0) {
+      setshowList(false)
+    } else {
+      setshowList(true)
+    }
   }
   fetchEntries(uid);
+
 }, [items]);
 
-if (items === undefined) {
+if (items === []) {
   return null;
 }
  
@@ -82,7 +88,7 @@ if (items === undefined) {
  
    e.preventDefault();
    if (!inputTitle ) {
-     alert("fill data");
+     alert("Please fill in title");
      showList(false);
    } else if (inputTitle && !toggleSubmit) {
 
@@ -116,11 +122,11 @@ if (items === undefined) {
  //   DELETE
  const handleDelete = (index) => {
    deleteFromDB(uid, index, tokenPromise);
-   setdeleteMessage(true);
+   //setdeleteMessage(true);
  
    setTimeout(() => {
      setdeleteMessage(false);
-   }, 1000);
+   }, 3000);
 
    setdeleteMessagesuccess(false);
  };
@@ -128,7 +134,7 @@ if (items === undefined) {
  
  //   EDIT
  const handleEdit = (_id) => {
-   setshowList(false);
+  //  setshowList(false);
    setshowDelete(false);
    setshowNew(false);
    setshowform(true);
@@ -373,7 +379,28 @@ if (items === undefined) {
          })}
        </Container>
      ) : (
-       ""
+       <Container>
+        <Accordion>
+        <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"  
+          >
+            <Typography sx={{ width: '95%', flexShrink: 0 }}>
+              Congratulations you have no current tasks
+            </Typography>
+
+        </AccordionSummary>
+        <AccordionDetails>
+
+        <Typography textAlign="left" >
+          <span className="font-link">
+            Add one now!
+            </span>
+          </Typography>
+        </AccordionDetails>
+        </Accordion>
+       </Container>
      )}
    </>
  );

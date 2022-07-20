@@ -29,9 +29,9 @@ function TaskManager() {
             <div>
                 <ResponsiveAppBar />
                 <Box pt={2} display='flex' justifyContent="center" alignItems="center">
-                <h2 className="font-link">
-                    TO DO LIST
-                </h2>
+                <h4 className="font-link"><b>
+                    Task Manager
+                </b></h4>
                 </Box>
                 <Todo uid={uid} tokenPromise={user.getIdToken()}/>
             

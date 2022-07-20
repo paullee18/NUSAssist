@@ -15,11 +15,14 @@ import AdbIcon from '@mui/icons-material/Adb';
 import { NavLink } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { styled } from "@mui/system";
+import logo50 from "../logo50.png";
 import SettingsIcon from '@mui/icons-material/SettingsApplications';
 
 
 const pages = ['Home', 'Calendar', 'Task Manager'];
-const settings = ['Profile'];
+// const settings = ['Profile'];
+const settings = [];
+
 
 const ResponsiveAppBar = () => {
   const { signout } = useAuth();
@@ -53,7 +56,8 @@ const ResponsiveAppBar = () => {
     <AppBar position="sticky">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
+          <img src={logo50}  sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} alt="logo"/>
           <Typography
             variant="h6"
             noWrap
