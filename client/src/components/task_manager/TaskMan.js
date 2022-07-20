@@ -12,12 +12,21 @@ import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
+import TextField from '@mui/material/TextField';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { TimePicker } from '@mui/x-date-pickers/TimePicker';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
+import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 import { isDisabled } from "@testing-library/user-event/dist/utils";
 import { addToDB, getTaskEntries, deleteFromDB, editTask } from "../../services/taskManagerServices";
  
 const Todo = (props) => {
  const { uid, tokenPromise } = props;
- const [showForm, setshowform] = useState(true);
+ const [showForm, setshowform] = useState(false);
  const [showNew, setshowNew] = useState(true);
  const [showDelete, setshowDelete] = useState(true);
  const [toggleSubmit, settoggleSubmit] = useState(true);
@@ -29,7 +38,7 @@ const Todo = (props) => {
 //  const [isCompleted, setisCompleted] = useState(false);
  const [inputTitle, setinputTitle] = useState("");
  const [inputDesc, setinputDesc] = useState("");
- const [inputDeadline, setInputDeadline] = useState("");
+ const [inputDeadline, setInputDeadline] = useState(null);
 
 const [ items, setitems ] = useState();
 
@@ -39,7 +48,7 @@ useEffect(() => {
     setitems(fetchedEntries.sort(function(task1,task2){return new Date(task2.date)- new Date(task1.date)}));
   }
   fetchEntries(uid);
-}, [])
+}, [items]);
 
 if (items === undefined) {
   return null;
@@ -60,8 +69,8 @@ if (items === undefined) {
    setisEditItem(index);
    console.log(toUpdate);
  }
- const handleInputDeadline = (e) => {
-  setInputDeadline(e.target.value);
+ const handleInputDeadline = (newDeadline) => {
+  setInputDeadline(newDeadline);
  }
 
  //   HANDLING INPUT FIELDS
@@ -76,26 +85,26 @@ if (items === undefined) {
      alert("fill data");
      showList(false);
    } else if (inputTitle && !toggleSubmit) {
-     setitems(
+
        items.map((elem) => {
          if (elem._id === isEditItem) {
-           editTask(uid, elem._id, inputTitle, inputDesc, tokenPromise);
+           editTask(uid, elem._id, inputTitle, inputDesc, elem.completed, elem.date, inputDeadline, tokenPromise);
            return { ...elem, task: inputTitle, desc: inputDesc };
          }
          return elem;
-       })
+       }
      );
  
      setinputTitle("");
      setinputDesc("");
-     setInputDeadline("");
+     setInputDeadline(null);
      settoggleSubmit(true);
      setshowform(false);
      setshowDelete(true);
     //  setisCompleted(false);
    } else {
 
-     addToDB(inputTitle, inputDesc, uid, tokenPromise).then(newItem => setitems([newItem, ...items]));
+     addToDB(inputTitle, inputDesc, inputDeadline, uid, tokenPromise);
 
      setinputTitle("");
      setinputDesc("");
@@ -106,12 +115,8 @@ if (items === undefined) {
  
  //   DELETE
  const handleDelete = (index) => {
-   const updatedItems = items.filter((elem) => {
-     return index !== elem._id;
-   });
    deleteFromDB(uid, index, tokenPromise);
    setdeleteMessage(true);
-   setitems(updatedItems);
  
    setTimeout(() => {
      setdeleteMessage(false);
@@ -136,13 +141,10 @@ if (items === undefined) {
    setinputTitle(newEditItem.task);
 
    setinputDesc(newEditItem.desc);
-   setInputDeadline(newEditItem.inputDeadline)
+   setInputDeadline(newEditItem.deadline)
    // setshowDelete(true)
  
    setisEditItem(_id);
-
-   console.log(newEditItem.task);
-   console.log(newEditItem);
  };
  //   EDIT
  
@@ -153,79 +155,147 @@ if (items === undefined) {
    setshowNew(false);
   //  setisCompleted(false);
  };
+
+ // Collapse add form
+ const handleBack = () => {
+  setshowform(false);
+  setshowList(true);
+  setshowNew(true);
+ //  setisCompleted(false);
+};
  // ADD NEW TASK
  return (
    <>
      {showNew ? (
        <Container>
          <div className="col-12 text-end">
-         <Box m={2}> 
+         <Box m={2} display='flex' justifyContent="center" alignItems="center"> 
            <Button variant="contained" onClick={handleAdd} >
            <span  className="font-link">
            Add New Task
            </span>
            </Button>
-           </Box>
+         </Box>
          </div>
        </Container>
      ) : (
-       ""
+      <Container>
+         <div className="col-12 text-end">
+         <Box m={2} display='flex' justifyContent="center" alignItems="center"> 
+           <Button variant="contained" onClick={handleBack} >
+           <span  className="font-link">
+           Back
+           </span>
+           </Button>
+         </Box>
+         </div>
+       </Container>
      )}
  
      {showForm ? (
-       <>
-         <div className="container border rounded d-flex justify-content-center shadow p-3 mb-5 bg-white rounded">
-           <div className="row">
-             <div className="text-center">
-               <h2 className="font-link">{toggleSubmit ? "Add Task" : " Edit Task"}</h2>
-             </div>
-             <form className="col-12 p-2" onSubmit={handleSubmit}>
-               <label htmlFor="Title" className="my-2 font-link" >
-                 Enter Title
-               </label>
-               <input
-                 type="text"
-                 name="title"
-                 id="title"
-                 placeholder="Title"
-                 className="w-100 my-1 p-2 font-link"
-                 onChange={handleInput}
-                 value={inputTitle}
-               />
-               <label className="my-2 font-link" htmlFor="description">
-                 Enter Description (Optional)
-               </label>
-               <input
-                 type="text"
-                 name="description"
-                 id="description"
-                 placeholder="Description"
-                 className="w-100 my-1 p-2 font-link"
-                 onChange={handleInputdesc}
-                 value={inputDesc}
-               />
-               <label className="my-2" >
-                 Deadline (Optional)
-               </label>
-               <input
-                 type="date"
-                 name="deadline"
-                 id="deadline"
-                 placeholder="DD/MM/YYYY"
-                 className="w-100 my-1 p-2"
-                 onChange={handleInputDeadline}
-                 value={inputDeadline}
-               />
-               {toggleSubmit ? (
-                 <button className="btn btn-primary my-2 font-link">Save</button>
-               ) : (
-                 <button className="btn btn-primary my-2 font-link">Update</button>
-               )}
-               {/* </div> */}
-             </form>
-           </div>
-         </div>
-       </>
+            <Paper elevation={3} style={{ padding: 30, margin: 'auto', marginTop: 10, marginBottom: 10 , width: 800, height: 400}} alignItems="center"
+                justifyContent="center">
+                <Grid 
+                    container
+                    spacing={3}
+                    rowSpacing={3}
+                    direction={'column'}
+                    justify={'center'}
+                    alignItems={'center'}
+                >
+            {/* <div className="container border rounded d-flex justify-content-center shadow p-3 mb-5 bg-white rounded"> */}
+              {/* <div className="row">
+                <div className="text-center"> */}
+                <Grid item xs={12}>
+                  <h2 className="font-link">{toggleSubmit ? "Add Task" : " Edit Task"}</h2>
+                </Grid>
+                {/* </div> */}
+                <Grid item xs={12}>
+
+                <form className="col-12 p-2" onSubmit={handleSubmit}>
+                <Grid 
+                    container
+                    spacing={3}
+                    rowSpacing={3}
+                    direction={'column'}
+                    justify={'center'}
+                    alignItems={'center'}
+                >
+                  {/* <label htmlFor="Title" className="my-2 font-link" >
+                    Enter Title
+                  </label> */}
+                  {/* <input
+                    type="text"
+                    name="title"
+                    id="title"
+                    placeholder="Title"
+                    className="w-100 my-1 p-2 font-link"
+                    onChange={handleInput}
+                    value={inputTitle}
+                  /> */}
+                  <Grid item xs={12}>
+
+                  <TextField id="title" label="Title" variant="outlined" onChange={handleInput} value={inputTitle} />
+                  </Grid>
+                  {/* <label className="my-2 font-link" htmlFor="description">
+                    Enter Description (Optional)
+                  </label>
+                  <input
+                    type="text"
+                    name="description"
+                    id="description"
+                    placeholder="Description"
+                    className="w-100 my-1 p-2 font-link"
+                    onChange={handleInputdesc}
+                    value={inputDesc}
+                  /> */}
+                  <Grid item xs={12}>
+
+                  <TextField id="description" fullWidth label="Description (Optional)" onChange={handleInputdesc} value={inputDesc} />
+                  </Grid>
+                  {/* <div className="text-center"> */}
+                  {/* <Grid item xs={12}>
+
+                  <label className="my-2" >
+                    Deadline (Optional)
+                  </label>
+                  </Grid> */}
+                  <Grid item xs={12}>
+                  {/* <input
+                    type="date"
+                    name="deadline"
+                    id="deadline"
+                    placeholder="DD/MM/YYYY"
+                    className="w-100 my-1 p-2"
+                    onChange={handleInputDeadline}
+                    value={inputDeadline}
+                  /> */}
+                  <LocalizationProvider dateAdapter={AdapterMoment}>
+                    <DateTimePicker
+                      renderInput={(props) => <TextField {...props} />}
+                      label="Deadline (Optional)"
+                      id="deadline"
+                      value={inputDeadline}
+                      onChange={(newDeadline) => {
+                        handleInputDeadline(newDeadline)
+                      }}
+                    />
+                  </LocalizationProvider>
+                  </Grid>
+                  <Grid>
+                  {toggleSubmit ? (
+                    <button className="btn btn-primary my-2 font-link">Save</button>
+                  ) : (
+                    <button className="btn btn-primary my-2 font-link">Update</button>
+                  )}
+                  {/* </div> */}
+                  </Grid>
+                  </Grid>
+                </form>
+                </Grid>
+              {/* </div> */}
+              </Grid>
+            </Paper>
      ) : (
        ""
      )}
@@ -238,6 +308,8 @@ if (items === undefined) {
            ""
          )}
          {items.map((elem, index) => {
+          const deadlineObj = new Date(elem.deadline);
+
            return (
              <div
              key = {elem._id}
@@ -262,7 +334,11 @@ if (items === undefined) {
               alignItems="center"
               spacing={1}
             >
-            <Checkbox color="success" />
+            <Checkbox color="success" checked={elem.completed? true : false} onClick={
+              () => editTask(uid, elem._id, elem.name, elem.desc, !elem.completed, elem.date, elem.deadline, tokenPromise)
+              }
+
+            />
             <IconButton aria-label="create"
                      onClick={() => handleEdit(elem._id)}
                    >
@@ -285,7 +361,8 @@ if (items === undefined) {
         <AccordionDetails>
           <Typography textAlign="left" >
           <span className="font-link">
-          {elem.desc}
+          {elem.desc != "" && <p> {elem.desc} </p>}
+          {elem.deadline!=null && <p> Deadline: {deadlineObj.toDateString()} {deadlineObj.toLocaleTimeString()}</p>}
           </span>
           </Typography>
         </AccordionDetails>

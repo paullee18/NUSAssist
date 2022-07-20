@@ -3,13 +3,25 @@ import axios from 'axios';
 const url = "http://localhost:5000/api/tasks";
 
 // Add task
-export const addToDB = async (name, desc, uid, tokenPromise) => {
+export const addToDB = async (name, desc, deadline, uid, tokenPromise) => {
     const header = await createReqHeader(uid, tokenPromise);
-    const payload = {
-        "task": name,
-        "desc": desc,
-        "uid": uid,
-        "date": new Date(),
+    let payload;
+    if (deadline == null) {
+        payload = {
+            "task": name,
+            "desc": desc,
+            "uid": uid,
+            "date": new Date(),
+            "deadline": null,
+        }
+    } else {
+        payload = {
+                "task": name,
+                "desc": desc,
+                "uid": uid,
+                "date": new Date(),
+                "deadline": new Date(deadline),
+        }
     }
     try {
         const res = await axios.post(url, payload, header);
@@ -58,14 +70,29 @@ export const deleteFromDB = async (uid, id, tokenPromise) => {
 }
 
 // Edit task
-export const editTask = async (uid, id, name, desc, tokenPromise) => {
+export const editTask = async (uid, id, name, desc, completed, date, deadline, tokenPromise) => {
     const header = await createReqHeader(uid, tokenPromise);
 
     try {
-        const payload = {
-            "task": name,
-            "desc": desc,
+        let payload;
+        if (deadline == null) {
+            payload = {
+                "task": name,
+                "desc": desc,
+                "completed": completed,
+                "date": new Date(date),
+                "deadline": null
+            }
+        } else {
+            payload = {
+                    "task": name,
+                    "desc": desc,
+                    "completed": completed,
+                    "date": new Date(date),
+                    "deadline": new Date(deadline)
+            }
         }
+        
         const taskUrl = url + `/${id}`;
 
         const res = await axios.put(taskUrl, payload, header);
