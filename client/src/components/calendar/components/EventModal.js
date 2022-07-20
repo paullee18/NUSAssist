@@ -2,12 +2,11 @@ import React, { useContext, useState } from "react";
 import GlobalContext from "../context/GlobalContext";
 
 const labelsClasses = [
-  "indigo",
-  "gray",
-  "green",
-  "blue",
   "red",
-  "purple",
+  "orange",
+  "yellow",
+  "greeen",
+  "blue",
 ];
 
 export default function EventModal() {
@@ -32,10 +31,11 @@ export default function EventModal() {
 
   function handleSubmit(e) {
     e.preventDefault();
+    
     const calendarEvent = {
       title,
       description,
-      label: selectedLabel,
+      label: "blue",
       day: daySelected.valueOf(),
       id: selectedEvent ? selectedEvent.id : Date.now(),
     };
@@ -49,7 +49,7 @@ export default function EventModal() {
   }
   return (
     <div className="h-screen w-full fixed left-0 top-0 flex justify-center items-center">
-      <form className="bg-white rounded-lg shadow-2xl w-1/4">
+      <form className="bg-white rounded-lg shadow-2xl w-1/4" onSubmit={handleSubmit}>
         <header className="bg-gray-100 px-4 py-2 flex justify-between items-center">
           <span className="material-icons-outlined text-gray-400">
             drag_handle
@@ -79,34 +79,34 @@ export default function EventModal() {
         <div className="p-3">
           <div className="grid grid-cols-1/5 items-end gap-y-7">
             <div></div>
+            <label htmlFor="Title" className="my-2 font-link" style={{fontWeight: 'bold'}}>
+                 Enter Title : 
+               </label>
             <input
               type="text"
               name="title"
               placeholder="Add title"
               value={title}
               required
-              className="pt-3 border-0 text-gray-600 text-xl font-semibold pb-2 w-full border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-blue-500"
+              className="w-100 my-1 p-2 font-link"
               onChange={(e) => setTitle(e.target.value)}
             />
-            <span className="material-icons-outlined text-gray-400">
-              schedule
-            </span>
-            <p>{daySelected.format("dddd, MMMM DD")}</p>
-            <span className="material-icons-outlined text-gray-400">
-              segment
-            </span>
+            
+            <p> <span style={{fontWeight: 'bold'}}>Date:</span> {daySelected.format("dddd, MMMM DD")}</p>
+            <label htmlFor="description" className="my-2 font-link"  style={{fontWeight: 'bold'}}>
+                 Enter Description : 
+               </label>
             <input
               type="text"
               name="description"
               placeholder="Add a description"
               value={description}
-              required
-              className="pt-3 border-0 text-gray-600 pb-2 w-full border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-blue-500"
+              className="w-100 my-1 p-2 font-link"
               onChange={(e) => setDescription(e.target.value)}
             />
-            <span className="material-icons-outlined text-gray-400">
-              bookmark_border
-            </span>
+            <label htmlFor="description" className="my-2 font-link"  style={{fontWeight: 'bold'}}>
+                 Labels : 
+               </label>
             <div className="flex gap-x-2">
               {labelsClasses.map((lblClass, i) => (
                 <span
@@ -127,7 +127,6 @@ export default function EventModal() {
         <footer className="flex justify-end border-t p-3 mt-5">
           <button
             type="submit"
-            onClick={handleSubmit}
             className="bg-blue-500 hover:bg-blue-600 px-6 py-2 rounded text-white"
           >
             Save
