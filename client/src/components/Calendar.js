@@ -11,22 +11,22 @@ import "../index.css";
 function Calendar() {
     const { user } = useAuth(); 
 
-    return user ?
-
-    (
-        // <div>
-        // <ResponsiveAppBar />
-        // <p> calendar </p>
-        // </div>
-        ReactDOM.render(
-            <React.StrictMode>
+    if (user) {
+      // getToken();
+      const uid = user.uid;
+      return (
+          <div>
+              <ResponsiveAppBar />
+              
               <ContextWrapper>
-                <App />
+                <App uid={uid} tokenPromise={user.getIdToken()}/>
               </ContextWrapper>
-            </React.StrictMode>,
-            document.getElementById("root")
-          )
-    ) : <Login/>;
+          
+          </div>
+      )
+  } else {
+      return <Login />;
+  }
 }
 
 export default Calendar;
