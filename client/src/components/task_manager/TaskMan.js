@@ -204,7 +204,6 @@ if (items === undefined) {
                  onChange={handleInputdesc}
                  value={inputDesc}
                />
-               {/* <div className="text-center"> */}
                <label className="my-2" >
                  Deadline (Optional)
                </label>

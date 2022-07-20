@@ -29,7 +29,7 @@ function TaskManager() {
             <div>
                 <ResponsiveAppBar />
                 <Box pt={2}>
-                <h2 className="font-link">
+                <h2 className="font-link" style={{textAlign: "center"}} >
                     TO DO LIST
                 </h2>
                 </Box>
