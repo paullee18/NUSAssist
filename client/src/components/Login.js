@@ -8,6 +8,7 @@ import {useState, useEffect} from 'react';
 import { red } from '@mui/material/colors';
 import Signup from './Signup';
 import { NavLink } from "react-router-dom";
+import logo150 from "../logo150.png";
 
 
 function Login() {
@@ -59,7 +60,7 @@ function Login() {
     return (
     <> 
         <ResponsiveAppBar />
-            <Paper elevation={6} style={{ padding: 30, margin: 'auto', width: 400, height: 500}} alignItems="center"
+            <Paper elevation={6} style={{ padding: 30, margin: 'auto', marginTop: 50, width: 440, height: 630}} alignItems="center"
   justifyContent="center">
                 <Grid 
                     container
@@ -69,7 +70,7 @@ function Login() {
                     alignItems={'center'}
                 >
                     <Grid item xs={12}>
-                        <h2> NUSAssist</h2>
+                        <img src={logo150} alt="logo" />
                     </Grid>
                     <Grid item xs={12}>
                         <TextField label="Email" id='email' value={state.email} onChange={handleChange}/>
@@ -94,7 +95,7 @@ function Login() {
                     </Button>
                     </Grid>
                     <Grid item xs={12}>
-                        <p> Don't have an account? <NavLink to="/signup" color='blue'>Signup</NavLink></p>
+                        <p> Don't have an account? <NavLink to="/signup" color='blue'><strong>Signup</strong></NavLink></p>
                     </Grid>
                 </Grid>
             </Paper>

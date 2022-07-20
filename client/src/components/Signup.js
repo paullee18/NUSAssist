@@ -7,6 +7,7 @@ import ResponsiveAppBar from './ResponsiveAppBar';
 import {useState, useEffect} from 'react';
 import { red } from '@mui/material/colors';
 import { NavLink } from "react-router-dom";
+import logo150 from "../logo150.png";
 
 function Signup() {
     const { signup } = useAuth();
@@ -86,7 +87,7 @@ function Signup() {
     return (
     <> 
         <ResponsiveAppBar />
-            <Paper elevation={6} style={{ padding: 30, margin: 'auto', width: 400, height: 500}} alignItems="center"
+            <Paper elevation={6} style={{ padding: 30, margin: 'auto', marginTop: 50, width: 440, height: 630}} alignItems="center"
   justifyContent="center">
                 <Grid 
                     container
@@ -96,7 +97,7 @@ function Signup() {
                     alignItems={'center'}
                 >
                     <Grid item xs={12}>
-                        <h2> NUSAssist</h2>
+                        <img src={logo150} alt="logo" />
                     </Grid>
                     <Grid item xs={12}>
                         <TextField label="Email" id='email' value={state.email} onChange={handleChange}/>
@@ -120,7 +121,7 @@ function Signup() {
                         <Button variant="contained" color="primary" onClick={handleSubmit}> Signup </Button>
                     </Grid>
                     <Grid item xs={12}>
-                        <p> Already have an account? <NavLink to="/" color='blue'>Signin</NavLink></p>
+                        <p> Already have an account? <NavLink to="/" color='blue'><strong>Signin</strong></NavLink></p>
                     </Grid>
 
 
