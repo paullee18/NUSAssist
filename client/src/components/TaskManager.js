@@ -28,7 +28,7 @@ function TaskManager() {
         return (
             <div>
                 <ResponsiveAppBar />
-                <Box pt={2}>
+                <Box pt={2} display='flex' justifyContent="center" alignItems="center">
                 <h2 className="font-link">
                     TO DO LIST
                 </h2>
