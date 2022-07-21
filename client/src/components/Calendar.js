@@ -13,13 +13,12 @@ function Calendar() {
 
     if (user) {
       // getToken();
-      const uid = user.uid;
       return (
           <div>
               <ResponsiveAppBar />
               
               <ContextWrapper>
-                <App uid={uid} tokenPromise={user.getIdToken()}/>
+                <App />
               </ContextWrapper>
           
           </div>
