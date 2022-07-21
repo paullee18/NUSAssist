@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
 const express = require('express');
 const router = require('./routes/api/tasks');
+const eventsRouter = require('./routes/api/events');
 const db = require('./models/task');
+const eventsDb = require('./models/event');
 const bodyParser = require("body-parser");
 const cors = require('cors');
 
@@ -29,6 +31,9 @@ app.use(cors());
 
 // tasks API routes
 app.use('/api/tasks', router);
+
+// events API routes
+app.use('/api/events', eventsRouter);
 
 const PORT = process.env.PORT || 5000;
 
