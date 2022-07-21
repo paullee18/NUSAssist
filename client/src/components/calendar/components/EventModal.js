@@ -1,13 +1,13 @@
 import React, { useContext, useState } from "react";
 import GlobalContext from "../context/GlobalContext";
 
-const labelsClasses = [
-  "red",
-  "orange",
-  "yellow",
-  "greeen",
-  "blue",
-];
+// const labelsClasses = [
+//   "blue",
+//   "orange",
+//   "yellow",
+//   "greeen",
+//   "blue",
+// ];
 
 export default function EventModal() {
   const {
@@ -23,11 +23,14 @@ export default function EventModal() {
   const [description, setDescription] = useState(
     selectedEvent ? selectedEvent.description : ""
   );
-  const [selectedLabel, setSelectedLabel] = useState(
-    selectedEvent
-      ? labelsClasses.find((lbl) => lbl === selectedEvent.label)
-      : labelsClasses[0]
-  );
+  const [begin, setBegin] = useState(selectedEvent ? selectedEvent.begin : "");
+
+  const [end, setEnd] = useState(selectedEvent ? selectedEvent.end : "")
+  // const [selectedLabel, setSelectedLabel] = useState(
+  //   selectedEvent
+  //     ? labelsClasses.find((lbl) => lbl === selectedEvent.label)
+  //     : labelsClasses[0]
+  // );
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -35,7 +38,9 @@ export default function EventModal() {
     const calendarEvent = {
       title,
       description,
-      label: "blue",
+      // label: "blue",
+      begin,
+      end,
       day: daySelected.valueOf(),
       id: selectedEvent ? selectedEvent.id : Date.now(),
     };
@@ -104,15 +109,35 @@ export default function EventModal() {
               className="w-100 my-1 p-2 font-link"
               onChange={(e) => setDescription(e.target.value)}
             />
-            <label htmlFor="description" className="my-2 font-link"  style={{fontWeight: 'bold'}}>
-                 Labels : 
+            <label className="my-2 font-link"  style={{fontWeight: 'bold'}}>
+                 Start Time : 
                </label>
-            <div className="flex gap-x-2">
+
+            <input
+              type="time"
+              name="begin"
+              value={begin}
+              className="w-100 my-1 p-2 font-link"
+              onChange={(e) => setBegin(e.target.value)}
+            />
+
+            <label className="my-2 font-link"  style={{fontWeight: 'bold'}}>
+                 End Time : 
+               </label>
+
+            <input
+              type="time"
+              name="end"
+              value={end}
+              className="w-100 my-1 p-2 font-link"
+              onChange={(e) => setEnd(e.target.value)}
+            />
+            {/* <div className="flex gap-x-2">
               {labelsClasses.map((lblClass, i) => (
                 <span
                   key={i}
                   onClick={() => setSelectedLabel(lblClass)}
-                  className={`bg-${lblClass}-500 w-6 h-6 rounded-full flex items-center justify-center cursor-pointer`}
+                  className={`bg-blue-500 w-6 h-6 rounded-full flex items-center justify-center cursor-pointer`}
                 >
                   {selectedLabel === lblClass && (
                     <span className="material-icons-outlined text-white text-sm">
@@ -121,7 +146,7 @@ export default function EventModal() {
                   )}
                 </span>
               ))}
-            </div>
+            </div> */}
           </div>
         </div>
         <footer className="flex justify-end border-t p-3 mt-5">
