@@ -3,18 +3,19 @@ import axios from 'axios';
 const url = "http://localhost:5000/api/events";
 
 // Add event
-export const addToDB = async (title, desc, day, id, uid, label, startTime, endTime, tokenPromise) => {
-    const header = await createReqHeader(uid, tokenPromise);
-    const payload = {
-        "title": title,
-        "desc": desc,
-        "day": day,
-        "id": id,
-        "uid": uid,
-        "label": label,
-        "startTime": startTime,
-        "endTime": endTime
-    }
+// export const addToDB = async (title, desc, day, id, uid, label, startTime, endTime, tokenPromise) => {
+export const addToDB = async (payload, tokenPromise) => {
+    const header = await createReqHeader(payload.uid, tokenPromise);
+    // const payload = {
+    //     "title": title,
+    //     "desc": desc,
+    //     "day": day,
+    //     "id": id,
+    //     "uid": uid,
+    //     "label": label,
+    //     "startTime": startTime,
+    //     "endTime": endTime
+    // }
     try {
         const res = await axios.post(url, payload, header);
         return res.data
@@ -62,20 +63,20 @@ export const deleteFromDB = async (uid, id, tokenPromise) => {
 }
 
 // Edit event
-export const editEvent = async (title, desc, day, id, uid, label, startTime, endTime, tokenPromise) => {
-    const header = await createReqHeader(uid, tokenPromise);
+export const editEvent = async (id, payload, tokenPromise) => {
+    const header = await createReqHeader(payload.uid, tokenPromise);
 
     try {
-        const payload = {
-            "title": title,
-            "desc": desc,
-            "day": day,
-            "id": id,
-            "uid": uid,
-            "label": label,
-            "startTime": startTime,
-            "endTime": endTime
-        }
+        // const payload = {
+        //     "title": title,
+        //     "desc": desc,
+        //     "day": day,
+        //     "id": id,
+        //     "uid": uid,
+        //     "label": label,
+        //     "startTime": startTime,
+        //     "endTime": endTime
+        // }
         const eventUrl = url + `/${id}`;
 
         const res = await axios.put(eventUrl, payload, header);
