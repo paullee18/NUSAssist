@@ -10,7 +10,7 @@ const eventSchema = new mongoose.Schema({
         required: false
     },
     day: {
-        type: Integer,
+        type: Number,
         required: true
     },
     id: {
@@ -24,14 +24,14 @@ const eventSchema = new mongoose.Schema({
     },
     label: {
         type: String,
-        required: true
+        required: false
     },
     startTime: {
-        type: Integer,
+        type: String,
         required: false
     },
     endTime: {
-        type: Integer,
+        type: String,
         required: true
     }
 });

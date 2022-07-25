@@ -16,13 +16,13 @@ function App() {
 
   return (
     <React.Fragment>
-      {showEventModal && <EventModal />}
+      {showEventModal && <EventModal/>}
 
       <div className="h-screen flex flex-col">
         <CalendarHeader />
         <div className="flex flex-1">
 
-          <Month month={currenMonth} />
+          <Month month={currenMonth}/>
         </div>
       </div>
     </React.Fragment>

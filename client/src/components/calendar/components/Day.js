@@ -3,22 +3,23 @@ import React, { useContext, useState, useEffect } from "react";
 import GlobalContext from "../context/GlobalContext";
 import Stack from '@mui/material/Stack';
 
-export default function Day({ day, rowIdx }) {
+export default function Day(props) {
+  const {day, rowIdx} = props;
   const [dayEvents, setDayEvents] = useState([]);
   const {
     setDaySelected,
     setShowEventModal,
-    filteredEvents,
+    // filteredEvents,
     setSelectedEvent,
   } = useContext(GlobalContext);
 
-  useEffect(() => {
-    const events = filteredEvents.filter(
-      (evt) =>
-        dayjs(evt.day).format("DD-MM-YY") === day.format("DD-MM-YY")
-    );
-    setDayEvents(events);
-  }, [filteredEvents, day]);
+  // useEffect(() => {
+  //   const events = filteredEvents.filter(
+  //     (evt) =>
+  //       dayjs(evt.day).format("DD-MM-YY") === day.format("DD-MM-YY")
+  //   );
+  //   setDayEvents(events);
+  // }, [filteredEvents, day]);
 
   function getCurrentDayClass() {
     return day.format("DD-MM-YY") === dayjs().format("DD-MM-YY")

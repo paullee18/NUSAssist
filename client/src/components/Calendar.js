@@ -7,23 +7,28 @@ import Calendar1 from "react-calendar";
 import App from "./calendar/calendarApp";
 import ContextWrapper from "./calendar/context/ContextWrapper"
 import "../index.css";
+import EmailVerification from "./EmailVerification";
 
 function Calendar() {
     const { user } = useAuth(); 
 
     if (user) {
       // getToken();
-      const uid = user.uid;
-      return (
+      if (user.emailVerified) {
+        return (
           <div>
               <ResponsiveAppBar />
               
               <ContextWrapper>
-                <App uid={uid} tokenPromise={user.getIdToken()}/>
+                <App />
               </ContextWrapper>
           
           </div>
       )
+      } else {
+        return <EmailVerification />
+      }
+      
   } else {
       return <Login />;
   }

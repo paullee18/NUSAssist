@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { editEvent, addToDB, deleteFromDB } from "../../../services/calendarServices";
 import GlobalContext from "../context/GlobalContext";
 import Stack from '@mui/material/Stack';
 
@@ -14,19 +15,20 @@ export default function EventModal() {
   const {
     setShowEventModal,
     daySelected,
-    dispatchCalEvent,
     selectedEvent,
+    uid,
+    tokenPromise
   } = useContext(GlobalContext);
 
   const [title, setTitle] = useState(
     selectedEvent ? selectedEvent.title : ""
   );
   const [description, setDescription] = useState(
-    selectedEvent ? selectedEvent.description : ""
+    selectedEvent ? selectedEvent.desc : ""
   );
-  const [begin, setBegin] = useState(selectedEvent ? selectedEvent.begin : "");
+  const [begin, setBegin] = useState(selectedEvent ? selectedEvent.startTime : "");
 
-  const [end, setEnd] = useState(selectedEvent ? selectedEvent.end : "")
+  const [end, setEnd] = useState(selectedEvent ? selectedEvent.endTime : "")
   // const [selectedLabel, setSelectedLabel] = useState(
   //   selectedEvent
   //     ? labelsClasses.find((lbl) => lbl === selectedEvent.label)
@@ -37,18 +39,19 @@ export default function EventModal() {
     e.preventDefault();
     
     const calendarEvent = {
-      title,
-      description,
+      "title": title,
+      "desc": description,
+      "day": daySelected.valueOf(),
       // label: "blue",
-      begin,
-      end,
-      day: daySelected.valueOf(),
-      id: selectedEvent ? selectedEvent.id : Date.now(),
+      "id": selectedEvent ? selectedEvent.id : Date.now(),
+      "uid": uid,
+      "startTime": begin,
+      "endTime": end,
     };
     if (selectedEvent) {
-      dispatchCalEvent({ type: "update", payload: calendarEvent });
+      editEvent(selectedEvent._id, calendarEvent, tokenPromise);
     } else {
-      dispatchCalEvent({ type: "push", payload: calendarEvent });
+      addToDB(calendarEvent, tokenPromise);
     }
 
     setShowEventModal(false);
@@ -60,7 +63,19 @@ export default function EventModal() {
           <span className="material-icons-outlined text-gray-400">
             drag_handle
           </span>
-          <div> 
+
+          <div>
+            {selectedEvent && (
+              <span
+                onClick={() => {
+                  deleteFromDB(uid, selectedEvent._id, tokenPromise)
+                  setShowEventModal(false);
+                }}
+                className="material-icons-outlined text-gray-400 cursor-pointer"
+              >
+                delete
+              </span>
+            )}
             <button onClick={() => setShowEventModal(false)}>
               <span className="material-icons-outlined text-gray-400">
                 close
@@ -118,7 +133,9 @@ export default function EventModal() {
               value={end}
               required
               className="w-100 my-1 p-2 font-link"
-              onChange={(e) => setEnd(e.target.value)}
+              onChange={(e) => 
+              setEnd(e.target.value)
+              }
             />
           </div>
         </div>
