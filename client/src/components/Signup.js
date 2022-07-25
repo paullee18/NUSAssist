@@ -107,7 +107,7 @@ function Signup() {
                     </Grid>
 
                     <Grid item xs={12}>
-                        <TextField label="dasdsad" type={'password'} id='password' value={state.password} onChange={handleChange}/>
+                        <TextField label="Password" type={'password'} id='password' value={state.password} onChange={handleChange}/>
                         {!passwordLongEnough && <p style={{color: 'red',}}> Password min. 6 characters </p>}
                         {emptyPassword && <p style={{color: 'red',}}> Please fill in password </p>}
                     </Grid>
