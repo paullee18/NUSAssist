@@ -28,14 +28,14 @@ import React, {
     
     }, [events]);
 
-    // const filteredEvents = useMemo(() => {
-    //   return events.filter((evt) =>
-    //     labels
-    //       .filter((lbl) => lbl.checked)
-    //       .map((lbl) => lbl.label)
-    //       .includes(evt.label)
-    //   );
-    // }, [events, labels]);
+    const filteredEvents = useMemo(() => {
+      return events.filter((evt) =>
+        labels
+          .filter((lbl) => lbl.checked)
+          .map((lbl) => lbl.label)
+          .includes(evt.label)
+      );
+    }, [events, labels]);
   
     useEffect(() => {
       setLabels((prevLabels) => {
@@ -79,8 +79,8 @@ import React, {
           setLabels,
           labels,
 
-          updateLabel,
-          // filteredEvents,
+          // updateLabel,
+          filteredEvents,
           uid,
           tokenPromise,
           events

@@ -64,7 +64,7 @@ export default function EventModal() {
             drag_handle
           </span>
 
-          <div>
+          {/* <div>
             {selectedEvent && (
               <span
                 onClick={() => {
@@ -74,14 +74,14 @@ export default function EventModal() {
                 className="material-icons-outlined text-gray-400 cursor-pointer"
               >
                 delete
-              </span>
-            )}
+              </span> 
+            )} */}
             <button onClick={() => setShowEventModal(false)}>
               <span className="material-icons-outlined text-gray-400">
                 close
               </span>
             </button>
-          </div>
+          {/* </div> */}
         </header>
         <div className="px-3 py-1">
           <div className="grid grid-cols-1/5 items-end gap-y-7">
@@ -141,14 +141,12 @@ export default function EventModal() {
         </div>
         <footer className="flex justify-between items-center border-t p-3 mt-5">
         {selectedEvent && (
-              <button
+          <button
                 onClick={() => {
-                  dispatchCalEvent({
-                    type: "delete",
-                    payload: selectedEvent,
-                  });
+                  deleteFromDB(uid, selectedEvent._id, tokenPromise)
                   setShowEventModal(false);
                 }}
+
                 className="bg-red-500 hover:bg-red-600 px-6 py-2 rounded text-white"
               >
                 Delete    
