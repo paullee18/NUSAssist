@@ -38,10 +38,10 @@ app.get('*', (req, res) => {
 })
 
 // tasks API routes
-app.use('/api/tasks', router);
+app.get('/api/tasks', router);
 
 // events API routes
-app.use('/api/events', eventsRouter);
+app.get('/api/events', eventsRouter);
 
 const PORT = process.env.PORT || 5000;
 
