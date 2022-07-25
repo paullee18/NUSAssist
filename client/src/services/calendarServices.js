@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = "http://localhost:5000/api/events";
+const url = "/api/events";
 
 // Add event
 // export const addToDB = async (title, desc, day, id, uid, label, startTime, endTime, tokenPromise) => {
