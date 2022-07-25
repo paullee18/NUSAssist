@@ -1,6 +1,6 @@
 {
   "proxy": "http://localhost:5000",
-  "homepage": "http://paullee18.github.io/nus-assist",
+  "homepage": "https://app.herokuapp.com",
   "name": "nus-assist",
   "version": "0.1.0",
   "private": true,
