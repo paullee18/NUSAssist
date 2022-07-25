@@ -7,13 +7,15 @@ import Calendar1 from "react-calendar";
 import App from "./calendar/calendarApp";
 import ContextWrapper from "./calendar/context/ContextWrapper"
 import "../index.css";
+import EmailVerification from "./EmailVerification";
 
 function Calendar() {
     const { user } = useAuth(); 
 
     if (user) {
       // getToken();
-      return (
+      if (user.emailVerified) {
+        return (
           <div>
               <ResponsiveAppBar />
               
@@ -23,6 +25,10 @@ function Calendar() {
           
           </div>
       )
+      } else {
+        return <EmailVerification />
+      }
+      
   } else {
       return <Login />;
   }

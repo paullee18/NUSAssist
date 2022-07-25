@@ -14,7 +14,6 @@ export default function EventModal() {
   const {
     setShowEventModal,
     daySelected,
-    // dispatchCalEvent,
     selectedEvent,
     uid,
     tokenPromise
@@ -49,10 +48,8 @@ export default function EventModal() {
       "endTime": end,
     };
     if (selectedEvent) {
-      // dispatchCalEvent({ type: "update", payload: calendarEvent });
       editEvent(selectedEvent._id, calendarEvent, tokenPromise);
     } else {
-      // dispatchCalEvent({ type: "push", payload: calendarEvent });
       addToDB(calendarEvent, tokenPromise);
     }
 
@@ -69,10 +66,6 @@ export default function EventModal() {
             {selectedEvent && (
               <span
                 onClick={() => {
-                  // dispatchCalEvent({
-                  //   type: "delete",
-                  //   payload: selectedEvent,
-                  // });
                   deleteFromDB(uid, selectedEvent._id, tokenPromise)
                   setShowEventModal(false);
                 }}
@@ -138,7 +131,6 @@ export default function EventModal() {
               value={end}
               className="w-100 my-1 p-2 font-link"
               onChange={(e) => 
-              // console.log(e.target.value)
               setEnd(e.target.value)
               }
             />

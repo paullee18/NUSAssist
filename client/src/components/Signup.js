@@ -17,6 +17,7 @@ function Signup() {
     const [emptyEmail, setEmptyEmail] = useState(false);
     const [emptyPassword, setEmptyPassword] = useState(false);
     const [emptyConfirmPass, setEmptyConfirmPass] = useState(false);
+    const [signedUp, setSignedUp] = useState(false);
 
     const [state, setState] = useState({
         email : '',
@@ -81,6 +82,7 @@ function Signup() {
             signup(state.email, state.password).catch(err => {
                 setInvalidUser(true);
             });
+            setSignedUp(true);
         }
     }
 
@@ -119,6 +121,7 @@ function Signup() {
 
                     <Grid item xs={12}>
                         <Button variant="contained" color="primary" onClick={handleSubmit}> Signup </Button>
+                        {signedUp && <p> Sign up successful! Please verify email and sign in</p>}
                     </Grid>
                     <Grid item xs={12}>
                         <p> Already have an account? <NavLink to="/" color='blue'><strong>Signin</strong></NavLink></p>
