@@ -19,7 +19,7 @@ import logo50 from "../logo50.png";
 import SettingsIcon from '@mui/icons-material/SettingsApplications';
 
 
-const pages = ['Home', 'Calendar', 'Task Manager'];
+const pages = ['Calendar', 'Task Manager'];
 // const settings = ['Profile'];
 const settings = [];
 
@@ -62,7 +62,7 @@ const ResponsiveAppBar = () => {
             variant="h6"
             noWrap
             component="a"
-            href="/"
+            href="/calendar"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -138,7 +138,7 @@ const ResponsiveAppBar = () => {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
-              <NavLink to= {page === "Home" ? "/" : page === "Calendar" ? "/calendar" : "/task-manager"}>
+              <NavLink to= {page === "Calendar" ? "/calendar" : "/task-manager"}>
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
