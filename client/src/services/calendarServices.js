@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = "/api/events";
+const url = "https://nus-assist.herokuapp.com/api/events";
 
 // Add event
 // export const addToDB = async (title, desc, day, id, uid, label, startTime, endTime, tokenPromise) => {

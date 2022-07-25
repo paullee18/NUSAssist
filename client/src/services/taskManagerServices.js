@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = "/api/tasks";
+const url = "https://nus-assist.herokuapp.com/api/tasks";
 
 // Add task
 export const addToDB = async (name, desc, deadline, uid, tokenPromise) => {
