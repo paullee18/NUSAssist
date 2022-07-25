@@ -34,10 +34,10 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, 'client/build')))
 
 // tasks API routes
-app.get('/api/tasks', router);
+app.use('/api/tasks', router);
 
 // events API routes
-app.get('/api/events', eventsRouter);
+app.use('/api/events', eventsRouter);
 
 // // Anything that doesn't match the above, send back index.html
 app.get('*', (req, res) => {
