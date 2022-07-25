@@ -8,8 +8,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start:react": "parcel serve client/src/index.js --open --dist-dir client/build",
-    "start": "node index",
+    "start": "node index.js",
     "dev": "nodemon index",
     "heroku-postbuild": "cd client && npm install --f && npm run build"
   },
