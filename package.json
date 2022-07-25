@@ -22,7 +22,7 @@
   "bugs": {
     "url": "https://github.com/paullee18/NUSAssist/issues"
   },
-  "homepage": "https://github.com/paullee18/NUSAssist#readme",
+  "homepage": "/",
   "dependencies": {
     "@types/react-router-dom": "^5.3.3",
     "cors": "^2.8.5",
