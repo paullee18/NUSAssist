@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start:react": "parcel serve client/src/index.js --open --dist-dir client/build",
     "start": "node index",
-    "dev": "nodemon index"
+    "dev": "nodemon index",
+    "build": "parcel build client/src/index.js --dist-dir client/build"
   },
   "repository": {
     "type": "git",
@@ -25,6 +27,7 @@
     "mongoose": "^6.4.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.16"
+    "nodemon": "^2.0.16",
+    "parcel": "^2.0.0-rc.0"
   }
 }
