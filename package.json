@@ -11,7 +11,7 @@
     "start:react": "parcel serve client/src/index.js --open --dist-dir client/build",
     "start": "node index",
     "dev": "nodemon index",
-    "heroku-postbuild": "cd client && npm install && npm run build"
+    "heroku-postbuild": "cd client && npm install --f && npm run build"
   },
   "repository": {
     "type": "git",
