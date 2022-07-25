@@ -8,7 +8,6 @@ const bodyParser = require("body-parser");
 const cors = require('cors');
 const path = require('path');
 
-// "http://paullee18.github.io/nus-assist",
 mongoose.connect(
     process.env.mongoDb,
     { useNewUrlParser: true, useUnifiedTopology: true })
