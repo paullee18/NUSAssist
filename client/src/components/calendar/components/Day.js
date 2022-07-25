@@ -8,17 +8,17 @@ export default function Day(props) {
   const {
     setDaySelected,
     setShowEventModal,
-    filteredEvents,
+    // filteredEvents,
     setSelectedEvent,
   } = useContext(GlobalContext);
 
-  useEffect(() => {
-    const events = filteredEvents.filter(
-      (evt) =>
-        dayjs(evt.day).format("DD-MM-YY") === day.format("DD-MM-YY")
-    );
-    setDayEvents(events);
-  }, [filteredEvents, day]);
+  // useEffect(() => {
+  //   const events = filteredEvents.filter(
+  //     (evt) =>
+  //       dayjs(evt.day).format("DD-MM-YY") === day.format("DD-MM-YY")
+  //   );
+  //   setDayEvents(events);
+  // }, [filteredEvents, day]);
 
   function getCurrentDayClass() {
     return day.format("DD-MM-YY") === dayjs().format("DD-MM-YY")

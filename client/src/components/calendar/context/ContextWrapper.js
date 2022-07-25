@@ -56,34 +56,34 @@ import React, {
     
     }, [events]);
 
-    const filteredEvents = useMemo(() => {
-      return events.filter((evt) =>
-        labels
-          .filter((lbl) => lbl.checked)
-          .map((lbl) => lbl.label)
-          .includes(evt.label)
-      );
-    }, [events, labels]);
+    // const filteredEvents = useMemo(() => {
+    //   return events.filter((evt) =>
+    //     labels
+    //       .filter((lbl) => lbl.checked)
+    //       .map((lbl) => lbl.label)
+    //       .includes(evt.label)
+    //   );
+    // }, [events, labels]);
   
     // useEffect(() => {
     //   localStorage.setItem("savedEvents", JSON.stringify(savedEvents));
     // }, [savedEvents]);
   
-    useEffect(() => {
-      setLabels((prevLabels) => {
-        return [...new Set(events.map((evt) => evt.label))].map(
-          (label) => {
-            const currentLabel = prevLabels.find(
-              (lbl) => lbl.label === label
-            );
-            return {
-              label,
-              checked: currentLabel ? currentLabel.checked : true,
-            };
-          }
-        );
-      });
-    }, [events]);
+    // useEffect(() => {
+    //   setLabels((prevLabels) => {
+    //     return [...new Set(events.map((evt) => evt.label))].map(
+    //       (label) => {
+    //         const currentLabel = prevLabels.find(
+    //           (lbl) => lbl.label === label
+    //         );
+    //         return {
+    //           label,
+    //           checked: currentLabel ? currentLabel.checked : true,
+    //         };
+    //       }
+    //     );
+    //   });
+    // }, [events]);
   
     // useEffect(() => {
     //   if (smallCalendarMonth !== null) {
@@ -119,7 +119,7 @@ import React, {
           setLabels,
           labels,
           updateLabel,
-          filteredEvents,
+          // filteredEvents,
           uid,
           tokenPromise,
           events
