@@ -2,8 +2,8 @@ const admin = require('firebase-admin');
 const serviceAccount = {
   type: "service_account",
   project_id: "nusassist",
-  private_key_id: process.env.private_key_id,
-  private_key: process.env.private_key,
+  private_key_id: process.env.private_key_id.replace(/\\n/g, '\n'),
+  private_key: process.env.private_key.replace(/\\n/g, '\n'),
   client_email: "firebase-adminsdk-vg0am@nusassist.iam.gserviceaccount.com",
   client_id: "102615693358193064986",
   auth_uri: "https://accounts.google.com/o/oauth2/auth",
