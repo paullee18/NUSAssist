@@ -1,4 +1,3 @@
-import './App.css';
 import { useAuth } from "./hooks/useAuth";
 import Login from "./components/Login.js";
 import {Outlet} from "react-router-dom";
