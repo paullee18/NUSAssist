@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 import React, { useContext, useState, useEffect } from "react";
 import GlobalContext from "../context/GlobalContext";
+import Stack from '@mui/material/Stack';
 
 export default function Day(props) {
   const {day, rowIdx} = props;
@@ -52,7 +53,10 @@ export default function Day(props) {
             onClick={() => setSelectedEvent(evt)}
             className={`bg-blue-200 p-1 mr-3 text-gray-600 text-sm rounded mb-1 truncate`}
           >
-            {evt.title}
+            <Stack direction='row' justifyContent="space-between" alignItems="center">
+            <span>{evt.title}</span>
+            <span>{evt.begin}</span>
+            </Stack>
           </div>
         ))}
       </div>

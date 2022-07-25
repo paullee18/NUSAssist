@@ -59,11 +59,11 @@ import React, {
       }
     }, [showEventModal]);
   
-    function updateLabel(label) {
-      setLabels(
-        labels.map((lbl) => (lbl.label === label.label ? label : lbl))
-      );
-    }
+    // function updateLabel(label) {
+    //   setLabels(
+    //     labels.map((lbl) => (lbl.label === label.label ? label : lbl))
+    //   );
+    // }
   
     return (
       <GlobalContext.Provider
@@ -78,6 +78,7 @@ import React, {
           setSelectedEvent,
           setLabels,
           labels,
+
           updateLabel,
           // filteredEvents,
           uid,
