@@ -121,7 +121,7 @@ function Signup() {
 
                     <Grid item xs={12}>
                         <Button variant="contained" color="primary" onClick={handleSubmit}> Signup </Button>
-                        {signedUp && <p> Sign up successful! Please verify email and sign in</p>}
+                        {signedUp && <p> Sign up successful! Please verify email and sign in </p>}
                     </Grid>
                     <Grid item xs={12}>
                         <p> Already have an account? <NavLink to="/" color='blue'><strong>Signin</strong></NavLink></p>
