@@ -9,6 +9,8 @@ import { red } from '@mui/material/colors';
 import Signup from './Signup';
 import { NavLink } from "react-router-dom";
 import logo150 from "../logo150.png";
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
 
 
 function Login() {
@@ -60,6 +62,10 @@ function Login() {
     return (
     <> 
         <ResponsiveAppBar />
+            <Alert style={{ marginTop:20 }} severity="info">
+            <AlertTitle>Demo Account</AlertTitle>
+            If you do not wish to sign up using your actual email, feel free to log in with this demo account! — <strong>Email: nusassistdemo@gmail.com Password: 123456</strong>
+            </Alert>
             <Paper elevation={6} style={{ padding: 30, margin: 'auto', marginTop: 50, width: 440, height: 630}} alignItems="center"
   justifyContent="center">
                 <Grid 
