@@ -1,4 +1,7 @@
 # NUSAssist
+## Deployment
+Check out the web application at https://nus-assist.herokuapp.com/
+
 ## Motivation
 As university students we make use of multiple applications to keep track of what we need to do and what classes we have, these include timetable planning applications like NUSMods and Google calendar, as well as a task manager application like Notion. This becomes tedious and overwhelming especially when our work piles up. Thus, we would like to come up with a way to integrate all of these functionalities into one consolidated web application, NUSAssist. 
 ## Calendar
